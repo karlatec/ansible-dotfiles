@@ -1,0 +1,47 @@
+---
+# Some of the tasks include plugins installation.
+# These are put into dotfile directories and referenced
+# in dotfiles themselves, so I feel they kind of belong in
+# this role.
+
+- name: Prepare dotfile directories
+  ansible.builtin.file:
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: "0755"
+    path: "{{ item }}"
+  loop:
+    - "{{ ansible_env.HOME }}/.vim"
+    - "{{ ansible_env.HOME }}/.vim/autoload"
+    - "{{ ansible_env.HOME }}/.config/tmux"
+    - "{{ ansible_env.HOME }}/.config/tmux/plugins"
+
+- name: Install plugin managers
+  block:
+    - name: Install tmux plugin manager
+      ansible.builtin.git:
+        repo: "https://github.com/tmux-plugins/tpm"
+        dest: "{{ ansible_env.HOME }}/.config/tmux/plugins/tpm"
+        version: master
+    - name: Install vim plugin manager
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: "{{ ansible_env.HOME }}/.vim/autoload/plug.vim"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: "0700"
+
+# Using links instead of copying on purpose.
+# Whenever I modify something in dotfiles I wouldn't need to copy
+# done changes to repository and can commit and push straight away.
+- name: Link dotfiles
+  ansible.builtin.file:
+    state: link
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - { src: "{{ role_path }}/files/vimrc", dest: "{{ ansible_env.HOME }}/.vim/vimrc" }
+    - { src: "{{ role_path }}/files/tmux.conf", dest: "{{ ansible_env.HOME }}/.config/tmux/tmux.conf" }
+  notify:
+    - Reload plugins

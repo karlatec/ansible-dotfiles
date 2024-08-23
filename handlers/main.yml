@@ -1,0 +1,4 @@
+---
+- name: Reload plugins
+  ansible.builtin.command: |
+    vim +PlugInstall +qall &> /dev/null
