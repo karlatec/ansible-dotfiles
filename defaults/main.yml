@@ -1,0 +1,4 @@
+---
+dotfiles_repository: "https://github.com/karlatec/dotfiles.git"
+dotfiles_local_path: "~/Documents/dotfiles"
+

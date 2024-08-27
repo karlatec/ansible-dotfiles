@@ -3,6 +3,10 @@
 # These are put into dotfile directories and referenced
 # in dotfiles themselves, so I feel they kind of belong in
 # this role.
+- name: Clone dotfiles from Github
+  ansible.builtin.git:
+    repo: "{{ dotfiles_repository }}"
+    dest: "{{ dotfiles_local_path }}"
 
 - name: Prepare dotfile directories
   ansible.builtin.file:
@@ -41,7 +45,7 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
   loop:
-    - { src: "{{ role_path }}/files/vimrc", dest: "{{ ansible_env.HOME }}/.vim/vimrc" }
-    - { src: "{{ role_path }}/files/tmux.conf", dest: "{{ ansible_env.HOME }}/.config/tmux/tmux.conf" }
+    - { src: "{{ dotfiles_local_path }}/vimrc", dest: "{{ ansible_env.HOME }}/.vim/vimrc" }
+    - { src: "{{ dotfiles_local_path }}/tmux.conf", dest: "{{ ansible_env.HOME }}/.config/tmux/tmux.conf" }
   notify:
     - Reload plugins
