@@ -2,3 +2,9 @@
 dotfiles_repository: "https://github.com/karlatec/dotfiles.git"
 dotfiles_local_path: "~/Documents/dotfiles"
 
+vim_files_path: "~/.vim"
+tmux_files_path: "~/.config/tmux"
+
+dotfiles_paths:
+  - { src: "{{ dotfiles_local_path }}/vimrc", dest: "{{ vim_files_path }}/vimrc" }
+  - { src: "{{ dotfiles_local_path }}/tmux.conf", dest: "{{ tmux_files_path }}/tmux.conf" }
