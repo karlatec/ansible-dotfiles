@@ -16,22 +16,22 @@
     mode: "0755"
     path: "{{ item }}"
   loop:
-    - "{{ ansible_env.HOME }}/.vim"
-    - "{{ ansible_env.HOME }}/.vim/autoload"
-    - "{{ ansible_env.HOME }}/.config/tmux"
-    - "{{ ansible_env.HOME }}/.config/tmux/plugins"
+    - "~/.vim"
+    - "~/.vim/autoload"
+    - "~/.config/tmux"
+    - "~/.config/tmux/plugins"
 
 - name: Install plugin managers
   block:
     - name: Install tmux plugin manager
       ansible.builtin.git:
         repo: "https://github.com/tmux-plugins/tpm"
-        dest: "{{ ansible_env.HOME }}/.config/tmux/plugins/tpm"
+        dest: "~/.config/tmux/plugins/tpm"
         version: master
     - name: Install vim plugin manager
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        dest: "{{ ansible_env.HOME }}/.vim/autoload/plug.vim"
+        dest: "~/.vim/autoload/plug.vim"
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: "0700"
@@ -45,7 +45,7 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
   loop:
-    - { src: "{{ dotfiles_local_path }}/vimrc", dest: "{{ ansible_env.HOME }}/.vim/vimrc" }
-    - { src: "{{ dotfiles_local_path }}/tmux.conf", dest: "{{ ansible_env.HOME }}/.config/tmux/tmux.conf" }
+    - { src: "{{ dotfiles_local_path }}/vimrc", dest: "~/.vim/vimrc" }
+    - { src: "{{ dotfiles_local_path }}/tmux.conf", dest: "~/.config/tmux/tmux.conf" }
   notify:
     - Reload plugins
