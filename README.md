@@ -10,7 +10,10 @@ As in [requirements.txt](https://github.com/karlatec/ansible-dotfiles/blob/main/
 
 ## Dependencies
 
-None.
+Following packages need to be installed in the target system:
+
+* git
+* vim
 
 ## Example playbook
 
