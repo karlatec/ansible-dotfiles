@@ -1,0 +1,16 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  pre_tasks:
+    - name: Install git
+      ansible.builtin.package:
+        name:
+          - git
+          - vim
+          - tmux
+        state: present
+      become: true
+      become_method: su
+  roles:
+   - role: ansible-dotfiles

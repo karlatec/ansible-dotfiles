@@ -1,0 +1,9 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: instance
+    # There isn't anything distro-specific so generic Python image
+    # should suffice.
+    image: python:latest
+    pre_build_image: true
