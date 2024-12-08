@@ -4,6 +4,8 @@ Simple role to manage my dotfiles from [karlatec/dotfiles](https://github.com/ka
 
 Used as part of other Ansible roles and playbooks.
 
+[![CI](https://github.com/karlatec/ansible-dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/karlatec/ansible-dotfiles/actions/workflows/ci.yml)
+
 ## Requirements
 
 As in [requirements.txt](https://github.com/karlatec/ansible-dotfiles/blob/main/requirements.txt).
