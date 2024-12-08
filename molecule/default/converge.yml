@@ -13,4 +13,4 @@
       become: true
       become_method: su
   roles:
-   - role: ansible-dotfiles
+    - role: ansible-dotfiles

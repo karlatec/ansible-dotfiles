@@ -6,5 +6,5 @@ vim_files_path: "~/.vim"
 tmux_files_path: "~/.config/tmux"
 
 dotfiles_paths:
-  - { src: "{{ dotfiles_local_path }}/vimrc", dest: "{{ vim_files_path }}/vimrc" }
-  - { src: "{{ dotfiles_local_path }}/tmux.conf", dest: "{{ tmux_files_path }}/tmux.conf" }
+  - {src: "{{ dotfiles_local_path }}/vimrc", dest: "{{ vim_files_path }}/vimrc"}
+  - {src: "{{ dotfiles_local_path }}/tmux.conf", dest: "{{ tmux_files_path }}/tmux.conf"}
